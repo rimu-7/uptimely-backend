@@ -7,12 +7,16 @@ import { loggerPlugin } from "./middleware/logger.middleware";
 import { appRouter } from "./routes";
 import { WorkerScheduler } from "./workers/scheduler";
 
+import { ipRateLimiter } from "./middleware/rate-limit.middleware";
+import { originGuardPlugin } from "./middleware/security-guard.middleware";
+
 export const app = new Elysia()
   .use(
     cors({
-      origin: "*",
+      origin: "https://uptimely.vercel.app",
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
+      credentials: true,
     })
   )
   .use(
@@ -34,6 +38,8 @@ export const app = new Elysia()
     })
   )
   .use(loggerPlugin)
+  .use(ipRateLimiter)
+  .use(originGuardPlugin)
   .use(appRouter);
 
 // Start standalone HTTP listener if running outside Vercel/Netlify serverless environment

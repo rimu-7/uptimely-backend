@@ -1,8 +1,10 @@
 import { Elysia, t } from "elysia";
 import { AuthService } from "./auth.service";
 import { getUserFromRequest, extractTokenFromRequest } from "../../middleware/auth.middleware";
+import { authRateLimiter } from "../../middleware/rate-limit.middleware";
 
 export const authController = new Elysia({ prefix: "/api/v1/auth" })
+  .use(authRateLimiter)
   // User Registration
   .post(
     "/register",

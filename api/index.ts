@@ -1,7 +1,8 @@
 import { app } from "../src/index";
 
 export default async function handler(req: any, res: any) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://uptimely.vercel.app");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, X-Requested-With");
 
@@ -12,7 +13,7 @@ export default async function handler(req: any, res: any) {
 
   try {
     const protocol = req.headers["x-forwarded-proto"] || "https";
-    const host = req.headers.host || "localhost";
+    const host = req.headers.host;
     const fullUrl = `${protocol}://${host}${req.url}`;
 
     const headers = new Headers();
