@@ -19,7 +19,7 @@ export async function runProbeCycle() {
     .where(
       sql`${schema.monitors.isActive} = true AND (
         ${schema.monitors.lastCheckedAt} IS NULL OR 
-        ${schema.monitors.lastCheckedAt} < NOW() - (${schema.monitors.intervalSeconds} * INTERVAL '1 second')
+        ${schema.monitors.lastCheckedAt} < NOW() - make_interval(secs => ${schema.monitors.intervalSeconds})
       )`
     );
 
