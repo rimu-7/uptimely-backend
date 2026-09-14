@@ -25,6 +25,7 @@
     "resend": "^6.28.0"
   },
   "devDependencies": {
+    "@types/bun": "^1.4.2",
     "@types/node": "^22.20.2",
     "bun-types": "latest",
     "drizzle-kit": "^0.31.10",
