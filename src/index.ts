@@ -10,23 +10,9 @@ import { WorkerScheduler } from "./workers/scheduler";
 export const app = new Elysia()
   .use(
     cors({
-      origin: (request) => {
-        const origin = request.headers.get("origin");
-        if (!origin) return true;
-        const allowedOrigins = [
-          "https://uptimely.netlify.app",
-          "http://localhost:3000",
-          "http://localhost:5173",
-          "http://localhost:3001",
-        ];
-        if (allowedOrigins.includes(origin) || origin.endsWith(".netlify.app")) {
-          return true;
-        }
-        return true;
-      },
+      origin: "*",
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
-      credentials: true,
     })
   )
   .use(

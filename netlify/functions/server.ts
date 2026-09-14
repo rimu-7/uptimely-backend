@@ -1,11 +1,8 @@
 import { app } from "../../src/index";
 
 export const handler = async (event: any, context: any) => {
-  const origin = event.headers.origin || event.headers.Origin || "https://uptimely.netlify.app";
-
   const corsHeaders: Record<string, string> = {
-    "Access-Control-Allow-Origin": origin,
-    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-Requested-With",
   };
